@@ -56,4 +56,65 @@ public class Employee extends Person {
         return false;
     }
 }
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Generate the dataset
+X = np.linspace(-10, 10, 80)
+Y = X**2 + np.random.normal(0, 10, size=X.shape[0])
+
+# Perform quadratic polynomial regression
+coefficients = np.polyfit(X, Y, 2)
+quadratic_function = np.poly1d(coefficients)
+
+# Calculate R^2 value
+Y_pred = quadratic_function(X)
+Y_mean = np.mean(Y)
+r_squared = 1 - np.sum((Y - Y_pred)**2) / np.sum((Y - Y_mean)**2)
+print("R^2 value:", r_squared)
+
+# Plot the data and the quadratic function
+plt.scatter(X, Y, label='Data Points')
+plt.plot(X, quadratic_function(X), color='red', label='Quadratic Function')
+plt.title('Quadratic Polynomial Regression')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set the random seed for reproducibility
+np.random.seed(42)
+
+# Generate 1000 random numbers from a normal distribution
+mean = 0
+std_dev = 1
+num_samples = 1000
+random_numbers = np.random.normal(mean, std_dev, num_samples)
+
+# Calculate mean and standard deviation
+sample_mean = np.mean(random_numbers)
+sample_std_dev = np.std(random_numbers)
+
+# Plot histogram with needle plot overlay
+plt.figure(figsize=(10, 6))
+plt.hist(random_numbers, bins=500, density=True, alpha=0.6, label='Histogram')
+
+# Plot needle plot overlay
+plt.axvline(sample_mean, color='red', linestyle='dashed', linewidth=2, label='Sample Mean')
+plt.axvline(sample_mean + sample_std_dev, color='green', linestyle='dashed', linewidth=2, label='1 Standard Deviation')
+plt.axvline(sample_mean - sample_std_dev, color='green', linestyle='dashed', linewidth=2)
+
+plt.title('Normal Distribution Simulation')
+plt.xlabel('Random Numbers')
+plt.ylabel('Frequency')
+plt.legend()
+plt.grid(True)
+plt.show()
