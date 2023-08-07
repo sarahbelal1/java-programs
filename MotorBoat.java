@@ -61,5 +61,22 @@
             }
         }
     }
+    import pandas as pd
+
+def generate_dynamic_report():
+    # Read data from CSV files
+    risk_score_df = pd.read_csv('risk_score.csv')
+    customer_asset_df = pd.read_csv('customer_asset.csv')
     
+    # Perform JOIN operations
+    merged_df = risk_score_df.merge(customer_asset_df, on="customer_id")
+    
+    # Create the view-like DataFrame
+    dynamic_report = merged_df[["customer_id", "risk_score", "available_funds"]]
+    
+    return dynamic_report
+
+# Generate and print the dynamic report
+report = generate_dynamic_report()
+print(report)
 
