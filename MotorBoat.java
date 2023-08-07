@@ -62,39 +62,39 @@
         }
     }
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-def read_age_and_risk_category_csv():
-    age_and_risk_category_df = pd.read_csv('age_and_risk_category.csv')
-    return age_and_risk_category_df
+# Read the CSV file
+age_and_risk_category_df = pd.read_csv('age_and_risk_category.csv')
 
-def read_available_assets_and_risk_score_csv():
-    available_assets_and_risk_score_df = pd.read_csv('available_assets_and_risk_score.csv')
-    return available_assets_and_risk_score_df
+# Explore the data
+print(age_and_risk_category_df.head())
+print(age_and_risk_category_df.info())
 
-def read_marital_status_and_risk_score_csv():
-    marital_status_and_risk_score_df = pd.read_csv('marital_status_and_risk_score.csv')
-    return marital_status_and_risk_score_df
+# Data Analysis: Boxplot
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 8))
 
-def read_state_and_risk_score_csv():
-    state_and_risk_score_df = pd.read_csv('state_and_risk_score.csv')
-    return state_and_risk_score_df
+# Boxplot
+plt.subplot(2, 1, 1)
+sns.boxplot(x="risk_category", y="age", data=age_and_risk_category_df)
+plt.title("Relationship Between Age and Risk Category")
+plt.xlabel("Risk Category")
+plt.ylabel("Age")
 
-# Read the CSV files
-age_and_risk_category_data = read_age_and_risk_category_csv()
-available_assets_and_risk_score_data = read_available_assets_and_risk_score_csv()
-marital_status_and_risk_score_data = read_marital_status_and_risk_score_csv()
-state_and_risk_score_data = read_state_and_risk_score_csv()
+# Histogram
+plt.subplot(2, 1, 2)
+g = sns.histplot(data=age_and_risk_category_df, x="age", hue="risk_category", multiple="stack")
+plt.title("Age Distribution Within Each Risk Category")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
 
-# Print the dataframes
-print("Age and Risk Category Data:")
-print(age_and_risk_category_data)
+plt.tight_layout()
+plt.show()
 
-print("\nAvailable Assets and Risk Score Data:")
-print(available_assets_and_risk_score_data)
-
-print("\nMarital Status and Risk Score Data:")
-print(marital_status_and_risk_score_data)
-
-print("\nState and Risk Score Data:")
-print(state_and_risk_score_data)
+# Data Analysis: Summary Statistics
+summary_stats = age_and_risk_category_df.groupby('risk_category')['age'].describe()
+print("\nSummary Statistics:")
+print(summary_stats)
 
