@@ -98,3 +98,81 @@ summary_stats = age_and_risk_category_df.groupby('risk_category')['age'].describ
 print("\nSummary Statistics:")
 print(summary_stats)
 
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Read the CSV file
+available_assets_and_risk_score_df = pd.read_csv('available_assets_and_risk_score.csv')
+
+# Data Analysis: Boxplot
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 8))
+
+# Boxplot
+plt.subplot(2, 1, 1)
+sns.boxplot(x="risk_score", y="available_funds", data=available_assets_and_risk_score_df)
+plt.title("Relationship Between Available Funds and Risk Score")
+plt.xlabel("Risk Score")
+plt.ylabel("Available Funds")
+
+# Histogram
+plt.subplot(2, 1, 2)
+g = sns.histplot(data=available_assets_and_risk_score_df, x="available_funds", hue="risk_score", multiple="stack")
+plt.title("Available Funds Distribution Within Each Risk Score")
+plt.xlabel("Available Funds")
+plt.ylabel("Frequency")
+
+plt.tight_layout()
+plt.show()
+
+# Data Analysis: Summary Statistics
+summary_stats = available_assets_and_risk_score_df.groupby('risk_score')['available_funds'].describe()
+print("\nSummary Statistics:")
+print(summary_stats)
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Read the CSV file
+marital_status_and_risk_score_df = pd.read_csv('marital_status_and_risk_score.csv')
+
+# Data Analysis: Countplot
+plt.figure(figsize=(10, 6))
+sns.countplot(x="marital_status", hue="risk_score", data=marital_status_and_risk_score_df)
+plt.title("Relationship Between Marital Status and Risk Score")
+plt.xlabel("Marital Status")
+plt.ylabel("Count")
+plt.legend(title="Risk Score")
+plt.show()
+
+# Data Analysis: Summary Statistics
+summary_stats = marital_status_and_risk_score_df.groupby('marital_status')['risk_score'].describe()
+print("\nSummary Statistics:")
+print(summary_stats)
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Read the CSV file
+state_and_risk_score_df = pd.read_csv('state_and_risk_score.csv')
+
+# Data Analysis: Countplot
+plt.figure(figsize=(10, 6))
+sns.countplot(x="state", hue="risk_score", data=state_and_risk_score_df)
+plt.title("Relationship Between State and Risk Score")
+plt.xlabel("State")
+plt.ylabel("Count")
+plt.legend(title="Risk Score")
+plt.xticks(rotation=45)
+plt.show()
+
+# Data Analysis: Summary Statistics
+summary_stats = state_and_risk_score_df.groupby('state')['risk_score'].describe()
+print("\nSummary Statistics:")
+print(summary_stats)
+
+
