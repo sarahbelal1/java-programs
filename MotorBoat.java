@@ -61,22 +61,40 @@
             }
         }
     }
-    import pandas as pd
+import pandas as pd
 
-def generate_dynamic_report():
-    # Read data from CSV files
-    risk_score_df = pd.read_csv('risk_score.csv')
-    customer_asset_df = pd.read_csv('customer_asset.csv')
-    
-    # Perform JOIN operations
-    merged_df = risk_score_df.merge(customer_asset_df, on="customer_id")
-    
-    # Create the view-like DataFrame
-    dynamic_report = merged_df[["customer_id", "risk_score", "available_funds"]]
-    
-    return dynamic_report
+def read_age_and_risk_category_csv():
+    age_and_risk_category_df = pd.read_csv('age_and_risk_category.csv')
+    return age_and_risk_category_df
 
-# Generate and print the dynamic report
-report = generate_dynamic_report()
-print(report)
+def read_available_assets_and_risk_score_csv():
+    available_assets_and_risk_score_df = pd.read_csv('available_assets_and_risk_score.csv')
+    return available_assets_and_risk_score_df
+
+def read_marital_status_and_risk_score_csv():
+    marital_status_and_risk_score_df = pd.read_csv('marital_status_and_risk_score.csv')
+    return marital_status_and_risk_score_df
+
+def read_state_and_risk_score_csv():
+    state_and_risk_score_df = pd.read_csv('state_and_risk_score.csv')
+    return state_and_risk_score_df
+
+# Read the CSV files
+age_and_risk_category_data = read_age_and_risk_category_csv()
+available_assets_and_risk_score_data = read_available_assets_and_risk_score_csv()
+marital_status_and_risk_score_data = read_marital_status_and_risk_score_csv()
+state_and_risk_score_data = read_state_and_risk_score_csv()
+
+# Print the dataframes
+print("Age and Risk Category Data:")
+print(age_and_risk_category_data)
+
+print("\nAvailable Assets and Risk Score Data:")
+print(available_assets_and_risk_score_data)
+
+print("\nMarital Status and Risk Score Data:")
+print(marital_status_and_risk_score_data)
+
+print("\nState and Risk Score Data:")
+print(state_and_risk_score_data)
 
