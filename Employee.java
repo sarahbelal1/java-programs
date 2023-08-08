@@ -118,3 +118,36 @@ plt.ylabel('Frequency')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+
+def analyze_age_and_risk():
+    # Read the CSV file into a pandas DataFrame
+    csv_file_path = 'age_and_risk_category.csv'
+    df = pd.read_csv(csv_file_path)
+
+    # Extract age and risk_score data from the DataFrame
+    age = df['age']
+    risk_score = df['risk_score']
+
+    # Create a scatter plot to visualize the relationship between age and risk_score
+    plt.scatter(age, risk_score, color='blue', alpha=0.5)
+    plt.xlabel('Age')
+    plt.ylabel('Risk Score')
+    plt.title('Age vs. Risk Score')
+
+    # Perform linear regression to calculate the R-squared value
+    slope, intercept, r_value, p_value, std_err = linregress(age, risk_score)
+    r_squared = r_value**2
+
+    # Create a line plot based on the linear regression
+    plt.plot(age, intercept + slope*age, color='red', label=f'R-squared: {r_squared:.4f}')
+    plt.legend()
+
+    # Show the plot
+    plt.show()
+
+# Call the function to analyze the data in the CSV file
+analyze_age_and_risk()
